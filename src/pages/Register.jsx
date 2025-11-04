@@ -6,7 +6,7 @@ import { User, Mail, Lock, Zap, AlertCircle, Eye, EyeOff, CheckCircle, ArrowLeft
 const Register = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,20 +47,20 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setLoading(true);
     setError('');
 
     const result = await register(formData.name, formData.email, formData.password);
-    
+
     if (result.success) {
       navigate('/dashboard');
     } else {
       setError(result.message);
     }
-    
+
     setLoading(false);
   };
 
@@ -71,76 +71,115 @@ const Register = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '20px',
+      padding: 'var(--spacing-md)',
       position: 'relative'
     }}>
-      {/* Back Button */}
-      <button
-        onClick={() => navigate('/')}
-        style={{
-          position: 'absolute',
-          top: '30px',
-          left: '30px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '12px 20px',
-          background: 'rgba(255, 255, 255, 0.2)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          borderRadius: '10px',
-          color: 'white',
-          fontSize: '15px',
-          fontWeight: '600',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease'
-        }}
-        onMouseOver={(e) => {
-          e.target.style.background = 'rgba(255, 255, 255, 0.3)';
-          e.target.style.transform = 'translateX(-5px)';
-        }}
-        onMouseOut={(e) => {
-          e.target.style.background = 'rgba(255, 255, 255, 0.2)';
-          e.target.style.transform = 'translateX(0)';
-        }}
-      >
-        <ArrowLeft size={20} />
-        Kembali
-      </button>
+      {/* Back Button - Desktop */}
+      {window.innerWidth >= 768 && (
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            position: 'absolute',
+            top: '30px',
+            left: '30px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '12px 20px',
+            background: 'rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            borderRadius: '10px',
+            color: 'white',
+            fontSize: '15px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.3)';
+            e.target.style.transform = 'translateX(-5px)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+            e.target.style.transform = 'translateX(0)';
+          }}
+        >
+          <ArrowLeft size={20} />
+          Kembali
+        </button>
+      )}
+
+      {/* Back Button - Mobile */}
+      {window.innerWidth < 768 && (
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            position: 'absolute',
+            top: '20px',
+            left: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '48px',
+            height: '48px',
+            background: 'rgba(255, 255, 255, 0.25)',
+            backdropFilter: 'blur(10px)',
+            border: '2px solid rgba(255, 255, 255, 0.4)',
+            borderRadius: '50%',
+            color: 'white',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+            zIndex: 10
+          }}
+          onTouchStart={(e) => {
+            e.target.style.transform = 'scale(0.95)';
+            e.target.style.background = 'rgba(255, 255, 255, 0.35)';
+          }}
+          onTouchEnd={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.background = 'rgba(255, 255, 255, 0.25)';
+          }}
+        >
+          <ArrowLeft size={22} />
+        </button>
+      )}
 
       <div style={{
         width: '100%',
         maxWidth: '500px',
         background: 'white',
-        borderRadius: '24px',
-        padding: '48px',
-        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)'
+        borderRadius: 'clamp(16px, 4vw, 24px)',
+        padding: 'clamp(24px, 6vw, 48px)',
+        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+        margin: 'var(--spacing-lg) 0'
       }}>
         {/* Logo & Title */}
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
           <div style={{
-            width: '80px',
-            height: '80px',
+            width: 'clamp(60px, 15vw, 80px)',
+            height: 'clamp(60px, 15vw, 80px)',
             background: 'linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)',
-            borderRadius: '20px',
+            borderRadius: 'clamp(15px, 4vw, 20px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '0 auto 20px',
+            margin: '0 auto var(--spacing-lg)',
             boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)'
           }}>
-            <Zap size={40} color="white" />
+            <Zap size={window.innerWidth < 768 ? 32 : 40} color="white" />
           </div>
           <h1 style={{
-            fontSize: '32px',
+            fontSize: 'clamp(24px, 6vw, 32px)',
             fontWeight: '800',
             color: '#1e293b',
-            marginBottom: '8px'
+            marginBottom: 'var(--spacing-sm)'
           }}>
             Buat Akun Baru
           </h1>
           <p style={{
-            fontSize: '16px',
+            fontSize: 'var(--font-size-base)',
             color: '#64748b'
           }}>
             Daftar dan mulai kelola listrik dengan cerdas
@@ -419,8 +458,8 @@ const Register = () => {
             disabled={loading}
             style={{
               width: '100%',
-              padding: '16px',
-              fontSize: '16px',
+              padding: window.innerWidth < 768 ? '20px' : '16px',
+              fontSize: window.innerWidth < 768 ? '18px' : '16px',
               fontWeight: '700',
               background: loading ? '#cbd5e1' : 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
               color: 'white',
@@ -428,7 +467,11 @@ const Register = () => {
               borderRadius: '12px',
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: loading ? 'none' : '0 8px 16px rgba(37, 99, 235, 0.3)'
+              boxShadow: loading ? 'none' : '0 8px 16px rgba(37, 99, 235, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: window.innerWidth < 768 ? '56px' : '48px'
             }}
             onMouseOver={(e) => {
               if (!loading) {

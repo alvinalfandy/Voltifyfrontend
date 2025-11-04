@@ -42,7 +42,7 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
     const newSelected = selectedIds.includes(id)
       ? selectedIds.filter(selectedId => selectedId !== id)
       : [...selectedIds, id];
-    
+
     setSelectedIds(newSelected);
     onSelectionChange(newSelected);
   };
@@ -73,7 +73,7 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
 
   if (appliances.length === 0) {
     return (
-      <div className="card text-center" style={{ 
+      <div className="card text-center" style={{
         border: '2px dashed #e2e8f0',
         padding: '60px 20px'
       }}>
@@ -96,8 +96,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
         </h2>
         <div style={{
           padding: '8px 16px',
-          background: selectedIds.length === appliances.length 
-            ? 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)' 
+          background: selectedIds.length === appliances.length
+            ? 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)'
             : 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
           borderRadius: '20px',
           fontSize: '14px',
@@ -113,14 +113,14 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
         </div>
       </div>
 
-      <div style={{ overflowX: 'auto' }}>
+      <div className="table-container">
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ 
+            <tr style={{
               borderBottom: '2px solid #e2e8f0',
               background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'
             }}>
-              <th style={{ 
+              <th style={{
                 padding: '16px',
                 textAlign: 'left',
                 width: '50px'
@@ -146,8 +146,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
                   }}
                 />
               </th>
-              <th style={{ 
-                padding: '16px', 
+              <th style={{
+                padding: '16px',
                 textAlign: 'left',
                 color: '#1e293b',
                 fontWeight: '700',
@@ -157,8 +157,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
               }}>
                 Nama
               </th>
-              <th style={{ 
-                padding: '16px', 
+              <th style={{
+                padding: '16px',
                 textAlign: 'left',
                 color: '#1e293b',
                 fontWeight: '700',
@@ -168,8 +168,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
               }}>
                 Kategori
               </th>
-              <th style={{ 
-                padding: '16px', 
+              <th style={{
+                padding: '16px',
                 textAlign: 'center',
                 color: '#1e293b',
                 fontWeight: '700',
@@ -179,8 +179,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
               }}>
                 Daya
               </th>
-              <th style={{ 
-                padding: '16px', 
+              <th style={{
+                padding: '16px',
                 textAlign: 'center',
                 color: '#1e293b',
                 fontWeight: '700',
@@ -190,8 +190,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
               }}>
                 Jam/Hari
               </th>
-              <th style={{ 
-                padding: '16px', 
+              <th style={{
+                padding: '16px',
                 textAlign: 'center',
                 color: '#1e293b',
                 fontWeight: '700',
@@ -201,8 +201,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
               }}>
                 kWh/Hari
               </th>
-              <th style={{ 
-                padding: '16px', 
+              <th style={{
+                padding: '16px',
                 textAlign: 'center',
                 color: '#1e293b',
                 fontWeight: '700',
@@ -218,9 +218,9 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
             {appliances.map((appliance) => {
               const categoryColor = getCategoryColor(appliance.category);
               return (
-                <tr 
-                  key={appliance._id} 
-                  style={{ 
+                <tr
+                  key={appliance._id}
+                  style={{
                     borderBottom: '1px solid #f1f5f9',
                     transition: 'background 0.2s ease'
                   }}
@@ -240,8 +240,8 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
                       }}
                     />
                   </td>
-                  <td style={{ 
-                    padding: '16px', 
+                  <td style={{
+                    padding: '16px',
                     fontWeight: '600',
                     color: '#1e293b',
                     fontSize: '15px'
@@ -263,10 +263,10 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
                     </span>
                   </td>
                   <td style={{ padding: '16px', textAlign: 'center' }}>
-                    <div style={{ 
-                      display: 'inline-flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
+                    <div style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '6px',
                       background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
                       padding: '8px 14px',
@@ -280,10 +280,10 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
                     </div>
                   </td>
                   <td style={{ padding: '16px', textAlign: 'center' }}>
-                    <div style={{ 
-                      display: 'inline-flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center', 
+                    <div style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '6px',
                       background: 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)',
                       padding: '8px 14px',
@@ -304,15 +304,15 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
                       borderRadius: '8px',
                       border: '2px solid #3b82f6'
                     }}>
-                      <span style={{ 
-                        fontWeight: '800', 
+                      <span style={{
+                        fontWeight: '800',
                         color: '#1e40af',
                         fontSize: '15px'
                       }}>
                         {calculateKwh(appliance.wattage, appliance.hoursPerDay)}
                       </span>
-                      <span style={{ 
-                        fontWeight: '600', 
+                      <span style={{
+                        fontWeight: '600',
                         color: '#64748b',
                         fontSize: '13px',
                         marginLeft: '4px'
@@ -358,17 +358,13 @@ const ApplianceList = ({ refresh, onSelectionChange }) => {
       </div>
 
       {/* Summary Footer */}
-      <div style={{
-        marginTop: '20px',
-        padding: '20px',
+      <div className="grid grid-3" style={{
+        marginTop: 'var(--spacing-lg)',
+        padding: 'var(--spacing-lg)',
         background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
         borderRadius: '12px',
         border: '1px solid #e2e8f0',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '16px'
+        gap: 'var(--spacing-md)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{

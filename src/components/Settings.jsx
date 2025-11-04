@@ -66,9 +66,9 @@ const Settings = () => {
   return (
     <div className="card" style={{ border: '1px solid #e2e8f0' }}>
       <div className="card-header" style={{ borderBottom: '1px solid #f1f5f9' }}>
-        <h2 className="card-title" style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
+        <h2 className="card-title" style={{
+          display: 'flex',
+          alignItems: 'center',
           gap: '12px',
           color: '#1e293b',
           fontSize: '24px'
@@ -109,11 +109,9 @@ const Settings = () => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '24px',
-          marginBottom: '30px'
+        <div className="grid grid-2" style={{
+          gap: 'var(--spacing-xl)',
+          marginBottom: 'var(--spacing-2xl)'
         }}>
           {/* Harga per kWh */}
           <div style={{
@@ -143,7 +141,7 @@ const Settings = () => {
                 Harga per kWh
               </label>
             </div>
-            
+
             <div style={{ position: 'relative' }}>
               <span style={{
                 position: 'absolute',
@@ -185,10 +183,10 @@ const Settings = () => {
                 }}
               />
             </div>
-            
-            <p style={{ 
-              fontSize: '13px', 
-              color: '#3b82f6', 
+
+            <p style={{
+              fontSize: '13px',
+              color: '#3b82f6',
               marginTop: '12px',
               fontWeight: '600',
               display: 'flex',
@@ -228,7 +226,7 @@ const Settings = () => {
                 Target Bulanan
               </label>
             </div>
-            
+
             <div style={{ position: 'relative' }}>
               <input
                 type="number"
@@ -270,10 +268,10 @@ const Settings = () => {
                 kWh
               </span>
             </div>
-            
-            <p style={{ 
-              fontSize: '13px', 
-              color: '#f59e0b', 
+
+            <p style={{
+              fontSize: '13px',
+              color: '#f59e0b',
               marginTop: '12px',
               fontWeight: '600',
               display: 'flex',
@@ -286,8 +284,8 @@ const Settings = () => {
           </div>
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={saving}
           style={{
             padding: '16px 32px',
@@ -339,11 +337,11 @@ const Settings = () => {
         borderRadius: '16px',
         border: '2px solid #e2e8f0'
       }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '12px', 
-          marginBottom: '16px' 
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          marginBottom: '16px'
         }}>
           <div style={{
             width: '36px',
@@ -356,25 +354,25 @@ const Settings = () => {
           }}>
             <Info size={20} color="white" />
           </div>
-          <h4 style={{ 
-            fontSize: '16px', 
+          <h4 style={{
+            fontSize: '16px',
             fontWeight: '700',
             color: '#1e293b'
           }}>
             📌 Referensi Tarif Listrik PLN 2024
           </h4>
         </div>
-        
-        <div style={{ 
+
+        <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '12px',
-          fontSize: '14px', 
-          color: '#475569', 
+          fontSize: '14px',
+          color: '#475569',
           lineHeight: '1.8',
           fontWeight: '600'
         }}>
-          <div style={{ 
+          <div style={{
             padding: '12px 16px',
             background: 'white',
             borderRadius: '8px',
@@ -382,7 +380,7 @@ const Settings = () => {
           }}>
             <span style={{ color: '#64748b' }}>• 450 VA:</span> <strong style={{ color: '#1e293b' }}>Rp 415/kWh</strong>
           </div>
-          <div style={{ 
+          <div style={{
             padding: '12px 16px',
             background: 'white',
             borderRadius: '8px',
@@ -390,7 +388,7 @@ const Settings = () => {
           }}>
             <span style={{ color: '#64748b' }}>• 900 VA:</span> <strong style={{ color: '#1e293b' }}>Rp 1.352/kWh</strong>
           </div>
-          <div style={{ 
+          <div style={{
             padding: '12px 16px',
             background: 'white',
             borderRadius: '8px',
@@ -398,7 +396,7 @@ const Settings = () => {
           }}>
             <span style={{ color: '#64748b' }}>• 1.300 VA:</span> <strong style={{ color: '#1e293b' }}>Rp 1.445/kWh</strong>
           </div>
-          <div style={{ 
+          <div style={{
             padding: '12px 16px',
             background: 'white',
             borderRadius: '8px',
@@ -406,7 +404,7 @@ const Settings = () => {
           }}>
             <span style={{ color: '#64748b' }}>• 2.200 VA:</span> <strong style={{ color: '#1e293b' }}>Rp 1.445/kWh</strong>
           </div>
-          <div style={{ 
+          <div style={{
             padding: '12px 16px',
             background: 'white',
             borderRadius: '8px',

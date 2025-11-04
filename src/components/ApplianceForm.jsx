@@ -54,9 +54,9 @@ const ApplianceForm = ({ onApplianceAdded }) => {
   return (
     <div className="card" style={{ border: '1px solid #e2e8f0' }}>
       <div className="card-header" style={{ borderBottom: '1px solid #f1f5f9' }}>
-        <h2 className="card-title" style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
+        <h2 className="card-title" style={{
+          display: 'flex',
+          alignItems: 'center',
           gap: '12px',
           color: '#1e293b',
           fontSize: '20px'
@@ -96,15 +96,13 @@ const ApplianceForm = ({ onApplianceAdded }) => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px',
-          marginBottom: '24px'
+        <div className="grid grid-2" style={{
+          gap: 'var(--spacing-lg)',
+          marginBottom: 'var(--spacing-xl)'
         }}>
           <div className="form-group">
-            <label className="form-label" style={{ 
-              fontWeight: '700', 
+            <label className="form-label" style={{
+              fontWeight: '700',
               color: '#1e293b',
               fontSize: '14px',
               marginBottom: '8px'
@@ -139,8 +137,8 @@ const ApplianceForm = ({ onApplianceAdded }) => {
           </div>
 
           <div className="form-group">
-            <label className="form-label" style={{ 
-              fontWeight: '700', 
+            <label className="form-label" style={{
+              fontWeight: '700',
               color: '#1e293b',
               fontSize: '14px',
               marginBottom: '8px'
@@ -177,8 +175,8 @@ const ApplianceForm = ({ onApplianceAdded }) => {
           </div>
 
           <div className="form-group">
-            <label className="form-label" style={{ 
-              fontWeight: '700', 
+            <label className="form-label" style={{
+              fontWeight: '700',
               color: '#1e293b',
               fontSize: '14px',
               marginBottom: '8px'
@@ -214,8 +212,8 @@ const ApplianceForm = ({ onApplianceAdded }) => {
           </div>
 
           <div className="form-group">
-            <label className="form-label" style={{ 
-              fontWeight: '700', 
+            <label className="form-label" style={{
+              fontWeight: '700',
               color: '#1e293b',
               fontSize: '14px',
               marginBottom: '8px'
@@ -253,8 +251,8 @@ const ApplianceForm = ({ onApplianceAdded }) => {
           </div>
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={loading}
           style={{
             padding: '14px 28px',

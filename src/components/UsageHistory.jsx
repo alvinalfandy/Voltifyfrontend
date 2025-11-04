@@ -43,7 +43,7 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
     const confirmed = window.confirm(
       '⚠️ PERHATIAN!\n\nAnda akan menghapus SEMUA history penggunaan listrik.\nTindakan ini TIDAK DAPAT dibatalkan!\n\nLanjutkan?'
     );
-    
+
     if (!confirmed) return;
 
     const doubleConfirm = window.confirm('Apakah Anda BENAR-BENAR yakin?');
@@ -135,9 +135,9 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
       </div>
 
       {history.length === 0 ? (
-        <div style={{ 
-          textAlign: 'center', 
-          padding: '60px 20px', 
+        <div style={{
+          textAlign: 'center',
+          padding: '60px 20px',
           color: '#64748b',
           border: '2px dashed #e2e8f0',
           borderRadius: '12px',
@@ -152,15 +152,15 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
           </p>
         </div>
       ) : (
-        <div style={{ overflowX: 'auto' }}>
+        <div className="table-container">
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ 
+              <tr style={{
                 borderBottom: '2px solid #e2e8f0',
                 background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'
               }}>
-                <th style={{ 
-                  padding: '16px', 
+                <th style={{
+                  padding: '16px',
                   textAlign: 'left',
                   color: '#1e293b',
                   fontWeight: '700',
@@ -170,8 +170,8 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                 }}>
                   Tanggal
                 </th>
-                <th style={{ 
-                  padding: '16px', 
+                <th style={{
+                  padding: '16px',
                   textAlign: 'center',
                   color: '#1e293b',
                   fontWeight: '700',
@@ -181,8 +181,8 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                 }}>
                   Total kWh
                 </th>
-                <th style={{ 
-                  padding: '16px', 
+                <th style={{
+                  padding: '16px',
                   textAlign: 'center',
                   color: '#1e293b',
                   fontWeight: '700',
@@ -192,8 +192,8 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                 }}>
                   Total Biaya
                 </th>
-                <th style={{ 
-                  padding: '16px', 
+                <th style={{
+                  padding: '16px',
                   textAlign: 'center',
                   color: '#1e293b',
                   fontWeight: '700',
@@ -203,8 +203,8 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                 }}>
                   Kategori
                 </th>
-                <th style={{ 
-                  padding: '16px', 
+                <th style={{
+                  padding: '16px',
                   textAlign: 'center',
                   color: '#1e293b',
                   fontWeight: '700',
@@ -214,8 +214,8 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                 }}>
                   Score
                 </th>
-                <th style={{ 
-                  padding: '16px', 
+                <th style={{
+                  padding: '16px',
                   textAlign: 'center',
                   color: '#1e293b',
                   fontWeight: '700',
@@ -229,12 +229,12 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
             </thead>
             <tbody>
               {history.map((item, index) => (
-                <tr key={item._id} style={{ 
+                <tr key={item._id} style={{
                   borderBottom: '1px solid #f1f5f9',
                   transition: 'background 0.2s ease'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.background = '#f8fafc'}
-                onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
+                  onMouseOver={(e) => e.currentTarget.style.background = '#f8fafc'}
+                  onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
                 >
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -264,9 +264,9 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                     </div>
                   </td>
                   <td style={{ padding: '16px', textAlign: 'center' }}>
-                    <div style={{ 
-                      display: 'inline-flex', 
-                      alignItems: 'center', 
+                    <div style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
                       gap: '6px',
                       background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
                       padding: '8px 14px',
@@ -278,9 +278,9 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                     </div>
                   </td>
                   <td style={{ padding: '16px', textAlign: 'center' }}>
-                    <div style={{ 
-                      display: 'inline-flex', 
-                      alignItems: 'center', 
+                    <div style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
                       gap: '6px',
                       background: 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)',
                       padding: '8px 14px',
@@ -307,8 +307,8 @@ const UsageHistory = ({ refresh, onDataChanged }) => {
                       border: '3px solid white',
                       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
                     }}>
-                      <span style={{ 
-                        fontWeight: '800', 
+                      <span style={{
+                        fontWeight: '800',
                         fontSize: '16px',
                         color: '#1e293b'
                       }}>
