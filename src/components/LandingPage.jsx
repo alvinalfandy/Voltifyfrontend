@@ -7,7 +7,7 @@ const LandingPage = () => {
   const [scrollY, setScrollY] = useState(0);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  
+
   const statsRef = useRef(null);
   const featuresRef = useRef(null);
   const howItWorksRef = useRef(null);
@@ -177,6 +177,13 @@ const LandingPage = () => {
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15) !important;
           }
           
+          @media (max-width: 768px) {
+            .hover-lift:hover {
+              transform: translateY(-6px) scale(1.01);
+              box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+            }
+          }
+          
           .feature-card {
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
@@ -221,7 +228,7 @@ const LandingPage = () => {
       <nav style={{
         background: '#ffffff',
         borderBottom: '1px solid #e2e8f0',
-        padding: '20px 0',
+        padding: 'clamp(16px, 4vw, 20px) 0',
         position: 'sticky',
         top: 0,
         zIndex: 1000,
@@ -229,9 +236,6 @@ const LandingPage = () => {
         backgroundColor: 'rgba(255, 255, 255, 0.9)'
       }}>
         <div className="container" style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '0 20px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center'
@@ -239,32 +243,43 @@ const LandingPage = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            gap: 'clamp(8px, 2vw, 12px)',
             cursor: 'pointer',
             transition: 'transform 0.3s ease'
           }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
             <div className="gradient-animated" style={{
-              width: '40px',
-              height: '40px',
+              width: 'clamp(32px, 8vw, 40px)',
+              height: 'clamp(32px, 8vw, 40px)',
               borderRadius: '10px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Zap size={24} color="white" />
+              <Zap size={window.innerWidth < 768 ? 20 : 24} color="white" />
             </div>
-            <h1 style={{ fontSize: '24px', fontWeight: '700', color: '#1e293b' }}>Voltify</h1>
+            <h1 style={{
+              fontSize: 'clamp(18px, 5vw, 24px)',
+              fontWeight: '700',
+              color: '#1e293b',
+              margin: 0
+            }}>
+              Voltify
+            </h1>
           </div>
-          
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+
+          <div style={{
+            display: 'flex',
+            gap: 'clamp(8px, 2vw, 12px)',
+            alignItems: 'center'
+          }}>
             <button
               onClick={() => navigate('/login')}
               style={{
-                padding: '10px 24px',
-                fontSize: '15px',
+                padding: 'clamp(8px, 2vw, 10px) clamp(16px, 4vw, 24px)',
+                fontSize: 'clamp(13px, 3vw, 15px)',
                 fontWeight: '600',
                 color: '#2563eb',
                 background: 'white',
@@ -284,13 +299,13 @@ const LandingPage = () => {
             >
               Login
             </button>
-            
+
             <button
               onClick={() => navigate('/register')}
               className="gradient-animated"
               style={{
-                padding: '10px 24px',
-                fontSize: '15px',
+                padding: 'clamp(8px, 2vw, 10px) clamp(16px, 4vw, 24px)',
+                fontSize: 'clamp(13px, 3vw, 15px)',
                 fontWeight: '600',
                 color: 'white',
                 border: 'none',
@@ -314,18 +329,18 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <div style={{ 
-        padding: '100px 20px 120px',
+      <div style={{
+        padding: 'clamp(60px, 15vw, 100px) clamp(16px, 4vw, 20px) clamp(80px, 20vw, 120px)',
         background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
         position: 'relative',
-        transform: `translateY(${scrollY * 0.15}px)`
+        transform: window.innerWidth > 768 ? `translateY(${scrollY * 0.15}px)` : 'none'
       }}>
         <div className="animate-float" style={{
           position: 'absolute',
           top: '10%',
           right: '10%',
-          width: '400px',
-          height: '400px',
+          width: 'clamp(200px, 30vw, 400px)',
+          height: 'clamp(200px, 30vw, 400px)',
           background: 'radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%)',
           borderRadius: '50%',
           filter: 'blur(40px)'
@@ -334,88 +349,89 @@ const LandingPage = () => {
           position: 'absolute',
           bottom: '20%',
           left: '5%',
-          width: '300px',
-          height: '300px',
+          width: 'clamp(150px, 25vw, 300px)',
+          height: 'clamp(150px, 25vw, 300px)',
           background: 'radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%)',
           borderRadius: '50%',
           filter: 'blur(40px)',
           animationDelay: '1s'
         }} />
-        
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+
+        <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <div className="animate-fadeInUp" style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '8px 16px',
+            gap: 'clamp(6px, 2vw, 8px)',
+            padding: 'clamp(6px, 2vw, 8px) clamp(12px, 3vw, 16px)',
             background: '#eff6ff',
             borderRadius: '100px',
-            marginBottom: '30px',
+            marginBottom: 'clamp(20px, 5vw, 30px)',
             border: '1px solid #bfdbfe',
             animationDelay: '0.2s',
             opacity: 0,
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.2)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = 'none';
-          }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.2)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             <Sparkles size={16} color="#2563eb" className="animate-pulse" />
-            <span style={{ fontSize: '14px', fontWeight: '600', color: '#2563eb' }}>
+            <span style={{ fontSize: 'clamp(12px, 3vw, 14px)', fontWeight: '600', color: '#2563eb' }}>
               Powered by Fuzzy Logic System
             </span>
           </div>
 
-          <h1 className="animate-fadeInUp" style={{ 
-            fontSize: '72px', 
-            fontWeight: '800', 
+          <h1 className="animate-fadeInUp" style={{
+            fontSize: 'clamp(36px, 10vw, 72px)',
+            fontWeight: '800',
             color: '#1e293b',
             lineHeight: '1.1',
-            marginBottom: '24px',
+            marginBottom: 'clamp(16px, 4vw, 24px)',
             letterSpacing: '-0.02em',
             animationDelay: '0.3s',
             opacity: 0
           }}>
             Kelola Listrik<br />
-            Lebih <span className="gradient-animated" style={{ 
+            Lebih <span className="gradient-animated" style={{
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>Cerdas</span>
           </h1>
 
-          <p className="animate-fadeInUp" style={{ 
-            fontSize: '22px', 
+          <p className="animate-fadeInUp" style={{
+            fontSize: 'clamp(16px, 4vw, 22px)',
             color: '#64748b',
             lineHeight: '1.6',
             maxWidth: '700px',
-            margin: '0 auto 50px',
+            margin: '0 auto clamp(30px, 8vw, 50px)',
             animationDelay: '0.4s',
             opacity: 0
           }}>
             Platform manajemen listrik pintar dengan Fuzzy Logic untuk mengklasifikasikan pola penggunaan dan memberikan rekomendasi hemat energi hingga 30%
           </p>
 
-          <div className="animate-fadeInUp" style={{ 
-            display: 'flex', 
-            gap: '16px', 
-            justifyContent: 'center', 
+          <div className="animate-fadeInUp" style={{
+            display: 'flex',
+            gap: 'clamp(12px, 3vw, 16px)',
+            justifyContent: 'center',
             flexWrap: 'wrap',
             animationDelay: '0.5s',
-            opacity: 0
+            opacity: 0,
+            marginBottom: 'clamp(40px, 10vw, 80px)'
           }}>
             <button
               onClick={() => navigate('/register')}
               className="gradient-animated"
               style={{
-                padding: '18px 40px',
-                fontSize: '18px',
+                padding: 'clamp(14px, 4vw, 18px) clamp(24px, 6vw, 40px)',
+                fontSize: 'clamp(16px, 4vw, 18px)',
                 fontWeight: '600',
                 color: 'white',
                 border: 'none',
@@ -423,9 +439,10 @@ const LandingPage = () => {
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: 'clamp(8px, 2vw, 10px)',
                 boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)',
-                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                minWidth: 'clamp(140px, 35vw, 200px)'
               }}
               onMouseOver={(e) => {
                 e.target.style.transform = 'translateY(-4px) scale(1.05)';
@@ -442,9 +459,10 @@ const LandingPage = () => {
 
             <button
               onClick={() => navigate('/login')}
+              className="desktop-only"
               style={{
-                padding: '18px 40px',
-                fontSize: '18px',
+                padding: 'clamp(14px, 4vw, 18px) clamp(24px, 6vw, 40px)',
+                fontSize: 'clamp(16px, 4vw, 18px)',
                 fontWeight: '600',
                 color: '#2563eb',
                 background: 'white',
@@ -453,7 +471,7 @@ const LandingPage = () => {
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: 'clamp(8px, 2vw, 10px)',
                 boxShadow: '0 10px 30px rgba(37, 99, 235, 0.15)',
                 transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
               }}
@@ -472,63 +490,11 @@ const LandingPage = () => {
             </button>
           </div>
 
-          <div className="animate-fadeInUp" style={{ 
-            marginTop: '80px',
-            position: 'relative',
-            animationDelay: '0.6s',
-            opacity: 0
-          }}>
-            <div className="hover-lift" style={{
-              background: 'white',
-              borderRadius: '20px',
-              padding: '40px',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1)',
-              border: '1px solid #e2e8f0',
-              maxWidth: '900px',
-              margin: '0 auto',
-              transform: `translateY(${scrollY * -0.08}px)`,
-              overflow: 'hidden'
-            }}>
-              <img 
-                src="https://images.unsplash.com/photo-1558002038-1055907df827?w=1200&q=80"
-                alt="Smart Home Energy Dashboard"
-                style={{
-                  width: '100%',
-                  borderRadius: '12px',
-                  display: 'block'
-                }}
-              />
-              <div style={{
-                position: 'absolute',
-                bottom: '60px',
-                left: '60px',
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(10px)',
-                padding: '20px 30px',
-                borderRadius: '12px',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
-                display: 'flex',
-                gap: '30px',
-                alignItems: 'center'
-              }}>
-                <div>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: '#10b981' }}>Fuzzy</div>
-                  <div style={{ fontSize: '12px', color: '#64748b', fontWeight: '500' }}>Logic System</div>
-                </div>
-                <div style={{ width: '1px', height: '40px', background: '#e2e8f0' }} />
-                <div>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: '#2563eb' }}>Smart</div>
-                  <div style={{ fontSize: '12px', color: '#64748b', fontWeight: '500' }}>Classification</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div className="animate-fadeInUp" style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '40px',
-            marginTop: '60px',
+            gap: 'clamp(20px, 8vw, 40px)',
+            marginTop: 'clamp(40px, 10vw, 60px)',
             flexWrap: 'wrap',
             animationDelay: '0.8s',
             opacity: 0
@@ -538,18 +504,18 @@ const LandingPage = () => {
               { text: 'Data Aman' },
               { text: 'Mudah Digunakan' }
             ].map((badge, i) => (
-              <div key={i} style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '8px',
+              <div key={i} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'clamp(6px, 2vw, 8px)',
                 transition: 'transform 0.3s ease',
                 cursor: 'pointer'
               }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.15)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.15)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
               >
                 <CheckCircle size={20} color="#10b981" />
-                <span style={{ fontSize: '15px', color: '#64748b', fontWeight: '500' }}>
+                <span style={{ fontSize: 'clamp(13px, 3vw, 15px)', color: '#64748b', fontWeight: '500' }}>
                   {badge.text}
                 </span>
               </div>
@@ -558,53 +524,139 @@ const LandingPage = () => {
         </div>
       </div>
 
+      {/* Visi Misi Section */}
+      <div style={{
+        background: 'white',
+        padding: 'clamp(60px, 15vw, 80px) clamp(16px, 4vw, 20px)',
+        borderTop: '1px solid #e2e8f0'
+      }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(2, 1fr)',
+            gap: 'clamp(40px, 10vw, 60px)',
+            alignItems: 'start'
+          }}>
+            {/* Visi */}
+            <div className="hover-lift" style={{
+              background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+              padding: 'clamp(30px, 8vw, 40px)',
+              borderRadius: '20px',
+              border: '2px solid #bfdbfe',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: 'clamp(60px, 15vw, 80px)',
+                height: 'clamp(60px, 15vw, 80px)',
+                background: 'linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto clamp(20px, 5vw, 24px)',
+                boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)'
+              }}>
+                <Sparkles size={window.innerWidth < 768 ? 32 : 40} color="white" />
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(24px, 6vw, 32px)',
+                fontWeight: '800',
+                color: '#1e293b',
+                marginBottom: 'clamp(16px, 4vw, 20px)'
+              }}>
+                Visi
+              </h2>
+              <p style={{
+                fontSize: 'clamp(14px, 3.5vw, 18px)',
+                color: '#64748b',
+                lineHeight: '1.6',
+                fontWeight: '500'
+              }}>
+                Menjadi platform terdepan dalam manajemen energi listrik yang memanfaatkan teknologi Fuzzy Logic untuk menciptakan kehidupan yang lebih hemat, efisien, dan ramah lingkungan.
+              </p>
+            </div>
+
+            {/* Misi */}
+            <div className="hover-lift" style={{
+              background: 'linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)',
+              padding: 'clamp(30px, 8vw, 40px)',
+              borderRadius: '20px',
+              border: '2px solid #a7f3d0',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: 'clamp(60px, 15vw, 80px)',
+                height: 'clamp(60px, 15vw, 80px)',
+                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto clamp(20px, 5vw, 24px)',
+                boxShadow: '0 10px 30px rgba(16, 185, 129, 0.3)'
+              }}>
+                <Zap size={window.innerWidth < 768 ? 32 : 40} color="white" />
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(24px, 6vw, 32px)',
+                fontWeight: '800',
+                color: '#1e293b',
+                marginBottom: 'clamp(16px, 4vw, 20px)'
+              }}>
+                Misi
+              </h2>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: 'clamp(8px, 2vw, 12px)',
+                  marginBottom: 'clamp(12px, 3vw, 16px)'
+                }}>
+                  <CheckCircle size={20} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <p style={{
+                    fontSize: 'clamp(14px, 3.5vw, 16px)',
+                    color: '#64748b',
+                    lineHeight: '1.6',
+                    fontWeight: '500',
+                    margin: 0
+                  }}>
+                    Menyediakan sistem klasifikasi penggunaan listrik berbasis Fuzzy Logic yang akurat dan mudah dipahami
+                  </p>
+                </div>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: 'clamp(8px, 2vw, 12px)'
+                }}>
+                  <CheckCircle size={20} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <p style={{
+                    fontSize: 'clamp(14px, 3.5vw, 16px)',
+                    color: '#64748b',
+                    lineHeight: '1.6',
+                    fontWeight: '500',
+                    margin: 0
+                  }}>
+                    Membantu pengguna menghemat biaya listrik hingga 30% melalui rekomendasi yang personal dan actionable
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Stats Section */}
       <div ref={statsRef} id="stats" style={{
-        background: 'white',
-        padding: '80px 20px',
-        borderTop: '1px solid #e2e8f0',
-        borderBottom: '1px solid #e2e8f0',
+        background: '#f8fafc',
+        padding: 'clamp(60px, 15vw, 80px) clamp(16px, 4vw, 20px)',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: '20px',
-          left: '10%',
-          width: '120px',
-          height: '120px',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          opacity: 0.06
-        }}>
-          <img 
-            src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=300&q=80"
-            alt="Smart Meter"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        <div style={{
-          position: 'absolute',
-          bottom: '20px',
-          right: '8%',
-          width: '100px',
-          height: '100px',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          opacity: 0.06
-        }}>
-          <img 
-            src="https://images.unsplash.com/photo-1558002038-1055907df827?w=300&q=80"
-            alt="Energy"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '40px',
+            gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: 'clamp(30px, 8vw, 40px)',
             textAlign: 'center'
           }}>
             {[
@@ -617,21 +669,21 @@ const LandingPage = () => {
                 opacity: visibleSections.has('stats') ? 1 : 0
               }}>
                 <div className="gradient-animated" style={{
-                  fontSize: '56px',
+                  fontSize: 'clamp(40px, 12vw, 56px)',
                   fontWeight: '800',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
-                  marginBottom: '12px',
+                  marginBottom: 'clamp(8px, 2vw, 12px)',
                   transition: 'transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
                   cursor: 'pointer'
                 }}
-                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2) rotate(5deg)'}
-                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.2) rotate(5deg)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
                 >
                   {stat.value}
                 </div>
-                <p style={{ fontSize: '18px', color: '#64748b', fontWeight: '500' }}>
+                <p style={{ fontSize: 'clamp(14px, 4vw, 18px)', color: '#64748b', fontWeight: '500' }}>
                   {stat.label}
                 </p>
               </div>
@@ -642,44 +694,26 @@ const LandingPage = () => {
 
       {/* Features Section */}
       <div ref={featuresRef} id="features" style={{
-        background: '#f8fafc',
-        padding: '100px 20px',
+        background: 'white',
+        padding: 'clamp(80px, 20vw, 100px) clamp(16px, 4vw, 20px)',
         position: 'relative'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: '50px',
-          right: '5%',
-          width: '200px',
-          height: '200px',
-          borderRadius: '20px',
-          overflow: 'hidden',
-          opacity: 0.1,
-          transform: 'rotate(12deg)'
-        }}>
-          <img 
-            src="https://images.unsplash.com/photo-1558002038-bb4237b54101?w=400&q=80"
-            alt="Solar Panel"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(60px, 15vw, 80px)' }}>
             <h2 className={visibleSections.has('features') ? 'animate-fadeInUp' : ''} style={{
-              fontSize: '48px',
+              fontSize: 'clamp(32px, 8vw, 48px)',
               fontWeight: '800',
               color: '#1e293b',
-              marginBottom: '16px',
+              marginBottom: 'clamp(12px, 3vw, 16px)',
               letterSpacing: '-0.02em',
               opacity: visibleSections.has('features') ? 1 : 0
             }}>
               Fitur Unggulan
             </h2>
-            <p className={visibleSections.has('features') ? 'animate-fadeInUp' : ''} style={{ 
-              fontSize: '20px', 
-              color: '#64748b', 
-              maxWidth: '600px', 
+            <p className={visibleSections.has('features') ? 'animate-fadeInUp' : ''} style={{
+              fontSize: 'clamp(16px, 4vw, 20px)',
+              color: '#64748b',
+              maxWidth: '600px',
               margin: '0 auto',
               animationDelay: '0.1s',
               opacity: visibleSections.has('features') ? 1 : 0
@@ -690,13 +724,13 @@ const LandingPage = () => {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '30px'
+            gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: 'clamp(24px, 6vw, 30px)'
           }}>
             {features.map((feature, index) => (
               <div key={index} className={visibleSections.has('features') ? 'feature-card hover-lift' : ''} style={{
                 background: 'white',
-                padding: '40px',
+                padding: 'clamp(30px, 8vw, 40px)',
                 borderRadius: '16px',
                 border: '1px solid #e2e8f0',
                 transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
@@ -704,48 +738,39 @@ const LandingPage = () => {
                 position: 'relative',
                 overflow: 'hidden'
               }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = '#2563eb';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = '#e2e8f0';
-              }}>
-                {index === 1 && (
-                  <div style={{
-                    position: 'absolute',
-                    top: '-20px',
-                    right: '-20px',
-                    width: '120px',
-                    height: '120px',
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    opacity: 0.05
-                  }}>
-                    <img 
-                      src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=300&q=80"
-                      alt="Tech"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                )}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.borderColor = '#2563eb';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                }}>
                 <div className="icon-wrapper" style={{
-                  width: '56px',
-                  height: '56px',
+                  width: 'clamp(48px, 12vw, 56px)',
+                  height: 'clamp(48px, 12vw, 56px)',
                   background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
                   borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '24px',
+                  marginBottom: 'clamp(20px, 5vw, 24px)',
                   position: 'relative',
                   zIndex: 1
                 }}>
-                  <feature.icon size={28} color="#2563eb" />
+                  <feature.icon size={window.innerWidth < 768 ? 24 : 28} color="#2563eb" />
                 </div>
-                <h3 style={{ fontSize: '22px', fontWeight: '700', color: '#1e293b', marginBottom: '12px' }}>
+                <h3 style={{
+                  fontSize: 'clamp(18px, 5vw, 22px)',
+                  fontWeight: '700',
+                  color: '#1e293b',
+                  marginBottom: 'clamp(8px, 2vw, 12px)'
+                }}>
                   {feature.title}
                 </h3>
-                <p style={{ fontSize: '16px', color: '#64748b', lineHeight: '1.6' }}>
+                <p style={{
+                  fontSize: 'clamp(14px, 3.5vw, 16px)',
+                  color: '#64748b',
+                  lineHeight: '1.6'
+                }}>
                   {feature.desc}
                 </p>
               </div>
@@ -756,85 +781,77 @@ const LandingPage = () => {
 
       {/* How It Works */}
       <div ref={howItWorksRef} id="howitworks" style={{
-        background: 'white',
-        padding: '100px 20px',
+        background: '#f8fafc',
+        padding: 'clamp(80px, 20vw, 100px) clamp(16px, 4vw, 20px)',
         position: 'relative'
       }}>
-        <div style={{
-          position: 'absolute',
-          bottom: '100px',
-          left: '5%',
-          width: '150px',
-          height: '150px',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          opacity: 0.08,
-          border: '3px solid #2563eb'
-        }}>
-          <img 
-            src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=300&q=80"
-            alt="Light Bulb"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(60px, 15vw, 80px)' }}>
             <h2 className={visibleSections.has('howitworks') ? 'animate-fadeInUp' : ''} style={{
-              fontSize: '48px',
+              fontSize: 'clamp(32px, 8vw, 48px)',
               fontWeight: '800',
               color: '#1e293b',
-              marginBottom: '16px',
+              marginBottom: 'clamp(12px, 3vw, 16px)',
               letterSpacing: '-0.02em',
               opacity: visibleSections.has('howitworks') ? 1 : 0
             }}>
               Cara Kerja
             </h2>
-            <p className={visibleSections.has('howitworks') ? 'animate-fadeInUp' : ''} style={{ 
-              fontSize: '20px', 
-              color: '#64748b', 
-              maxWidth: '600px', 
+            <p className={visibleSections.has('howitworks') ? 'animate-fadeInUp' : ''} style={{
+              fontSize: 'clamp(16px, 4vw, 20px)',
+              color: '#64748b',
+              maxWidth: '600px',
               margin: '0 auto',
               animationDelay: '0.1s',
               opacity: visibleSections.has('howitworks') ? 1 : 0
             }}>
-              Kelola listrik rumah Anda dalam 4 langkah mudah
+              Mulai hemat listrik dalam 4 langkah mudah
             </p>
           </div>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '40px'
+            gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'clamp(24px, 6vw, 30px)'
           }}>
             {steps.map((step, index) => (
-              <div key={index} className={visibleSections.has('howitworks') ? 'step-card' : ''} style={{ 
+              <div key={index} className={visibleSections.has('howitworks') ? 'step-card hover-lift' : ''} style={{
+                background: 'white',
+                padding: 'clamp(30px, 8vw, 40px)',
+                borderRadius: '16px',
+                border: '1px solid #e2e8f0',
                 textAlign: 'center',
-                transition: 'transform 0.3s ease',
-                cursor: 'pointer'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-              >
-                <div className="step-number gradient-animated" style={{
-                  width: '72px',
-                  height: '72px',
+                position: 'relative'
+              }}>
+                <div className="step-number" style={{
+                  width: 'clamp(60px, 15vw, 80px)',
+                  height: 'clamp(60px, 15vw, 80px)',
+                  background: 'linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 24px',
-                  fontSize: '24px',
+                  margin: '0 auto clamp(20px, 5vw, 24px)',
+                  fontSize: 'clamp(20px, 5vw, 28px)',
                   fontWeight: '800',
                   color: 'white',
                   boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)'
                 }}>
                   {step.num}
                 </div>
-                <h3 style={{ fontSize: '20px', fontWeight: '700', color: '#1e293b', marginBottom: '12px' }}>
+                <h3 style={{
+                  fontSize: 'clamp(18px, 5vw, 22px)',
+                  fontWeight: '700',
+                  color: '#1e293b',
+                  marginBottom: 'clamp(8px, 2vw, 12px)'
+                }}>
                   {step.title}
                 </h3>
-                <p style={{ fontSize: '16px', color: '#64748b', lineHeight: '1.6' }}>
+                <p style={{
+                  fontSize: 'clamp(14px, 3.5vw, 16px)',
+                  color: '#64748b',
+                  lineHeight: '1.6'
+                }}>
                   {step.desc}
                 </p>
               </div>
@@ -843,517 +860,223 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Visi & Misi Section */}
-      <div style={{
-        background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)',
-        padding: '100px 20px',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        <div className="animate-float" style={{
-          position: 'absolute',
-          top: '10%',
-          right: '5%',
-          width: '200px',
-          height: '200px',
-          background: 'radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(40px)'
-        }} />
-        
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-            <h2 style={{
-              fontSize: '48px',
-              fontWeight: '800',
-              color: '#1e293b',
-              marginBottom: '16px',
-              letterSpacing: '-0.02em'
-            }}>
-              Visi & Misi
-            </h2>
-            <p style={{ fontSize: '20px', color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
-              Komitmen kami untuk masa depan energi yang lebih cerdas
-            </p>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))',
-            gap: '40px',
-            maxWidth: '1000px',
-            margin: '0 auto'
-          }}>
-            <div className="hover-lift" style={{
-              background: 'white',
-              padding: '50px',
-              borderRadius: '20px',
-              border: '2px solid #e2e8f0',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                position: 'absolute',
-                top: '-30px',
-                right: '-30px',
-                width: '150px',
-                height: '150px',
-                background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
-                borderRadius: '50%',
-                opacity: 0.5
-              }} />
-              
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{
-                  width: '64px',
-                  height: '64px',
-                  background: 'linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)',
-                  borderRadius: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '24px',
-                  boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)'
-                }}>
-                  <Sparkles size={32} color="white" />
-                </div>
-                
-                <h3 style={{
-                  fontSize: '28px',
-                  fontWeight: '800',
-                  color: '#1e293b',
-                  marginBottom: '20px'
-                }}>
-                  Visi
-                </h3>
-                
-                <p style={{
-                  fontSize: '17px',
-                  color: '#64748b',
-                  lineHeight: '1.8',
-                  fontWeight: '500'
-                }}>
-                  Menjadi platform terdepan dalam manajemen energi listrik yang memanfaatkan teknologi Fuzzy Logic untuk menciptakan kehidupan yang lebih hemat, efisien, dan ramah lingkungan.
-                </p>
-              </div>
-            </div>
-
-            <div className="hover-lift" style={{
-              background: 'white',
-              padding: '50px',
-              borderRadius: '20px',
-              border: '2px solid #e2e8f0',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                position: 'absolute',
-                top: '-30px',
-                right: '-30px',
-                width: '150px',
-                height: '150px',
-                background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
-                borderRadius: '50%',
-                opacity: 0.5
-              }} />
-              
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{
-                  width: '64px',
-                  height: '64px',
-                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                  borderRadius: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '24px',
-                  boxShadow: '0 10px 30px rgba(16, 185, 129, 0.3)'
-                }}>
-                  <Zap size={32} color="white" />
-                </div>
-                
-                <h3 style={{
-                  fontSize: '28px',
-                  fontWeight: '800',
-                  color: '#1e293b',
-                  marginBottom: '20px'
-                }}>
-                  Misi
-                </h3>
-                
-                <ul style={{
-                  listStyle: 'none',
-                  padding: 0,
-                  margin: 0
-                }}>
-                  {[
-                    'Menyediakan sistem klasifikasi penggunaan listrik berbasis Fuzzy Logic yang akurat',
-                    'Membantu pengguna menghemat biaya listrik hingga 30%',
-                    'Memberikan rekomendasi personalisasi untuk efisiensi energi',
-                    'Meningkatkan kesadaran masyarakat tentang pengelolaan listrik yang bijak'
-                  ].map((item, index) => (
-                    <li key={index} style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      marginBottom: '16px',
-                      fontSize: '16px',
-                      color: '#64748b',
-                      lineHeight: '1.6',
-                      fontWeight: '500'
-                    }}>
-                      <CheckCircle size={20} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* FAQ Section */}
       <div style={{
         background: 'white',
-        padding: '100px 20px',
-        position: 'relative'
+        padding: 'clamp(80px, 20vw, 100px) clamp(16px, 4vw, 20px)'
       }}>
-        <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(60px, 15vw, 80px)' }}>
             <h2 style={{
-              fontSize: '48px',
+              fontSize: 'clamp(32px, 8vw, 48px)',
               fontWeight: '800',
               color: '#1e293b',
-              marginBottom: '16px',
+              marginBottom: 'clamp(12px, 3vw, 16px)',
               letterSpacing: '-0.02em'
             }}>
-              Pertanyaan yang Sering Ditanyakan
+              Pertanyaan Umum
             </h2>
-            <p style={{ fontSize: '20px', color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>
-              Semua yang perlu Anda ketahui tentang Voltify dan Fuzzy Logic
+            <p style={{
+              fontSize: 'clamp(16px, 4vw, 20px)',
+              color: '#64748b'
+            }}>
+              Temukan jawaban untuk pertanyaan yang sering diajukan
             </p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 4vw, 20px)' }}>
             {faqs.map((faq, index) => (
               <div key={index} style={{
-                background: 'white',
-                border: '2px solid #e2e8f0',
-                borderRadius: '16px',
+                background: '#f8fafc',
+                borderRadius: '12px',
+                border: '1px solid #e2e8f0',
                 overflow: 'hidden',
                 transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = '#2563eb';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.1)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = '#e2e8f0';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-              >
-                <div
+              }}>
+                <button
                   onClick={() => toggleFaq(index)}
                   style={{
-                    padding: '24px 28px',
+                    width: '100%',
+                    padding: 'clamp(20px, 5vw, 24px)',
+                    background: 'transparent',
+                    border: 'none',
+                    textAlign: 'left',
                     cursor: 'pointer',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    gap: '20px',
-                    background: openFaqIndex === index ? '#f8fafc' : 'white',
-                    transition: 'background 0.3s ease'
+                    gap: 'clamp(12px, 3vw, 16px)'
                   }}
                 >
-                  <h3 style={{
-                    fontSize: '18px',
-                    fontWeight: '700',
-                    color: '#1e293b',
-                    margin: 0,
-                    flex: 1
+                  <span style={{
+                    fontSize: 'clamp(16px, 4vw, 18px)',
+                    fontWeight: '600',
+                    color: '#1e293b'
                   }}>
                     {faq.question}
-                  </h3>
+                  </span>
+                  <ChevronDown
+                    size={20}
+                    color="#64748b"
+                    style={{
+                      transform: openFaqIndex === index ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s ease',
+                      flexShrink: 0
+                    }}
+                  />
+                </button>
+                {openFaqIndex === index && (
                   <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: openFaqIndex === index ? '#2563eb' : '#f1f5f9',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'all 0.3s ease',
-                    transform: openFaqIndex === index ? 'rotate(180deg)' : 'rotate(0deg)',
-                    flexShrink: 0
-                  }}>
-                    <ChevronDown size={20} color={openFaqIndex === index ? 'white' : '#64748b'} />
-                  </div>
-                </div>
-
-                <div style={{
-                  maxHeight: openFaqIndex === index ? '500px' : '0',
-                  overflow: 'hidden',
-                  transition: 'max-height 0.4s ease',
-                }}>
-                  <div style={{
-                    padding: '0 28px 24px',
+                    padding: '0 clamp(20px, 5vw, 24px) clamp(20px, 5vw, 24px)',
                     borderTop: '1px solid #e2e8f0'
                   }}>
                     <p style={{
-                      fontSize: '16px',
+                      fontSize: 'clamp(14px, 3.5vw, 16px)',
                       color: '#64748b',
-                      lineHeight: '1.8',
-                      margin: '20px 0 0',
-                      fontWeight: '500'
+                      lineHeight: '1.6',
+                      margin: 0
                     }}>
                       {faq.answer}
                     </p>
                   </div>
-                </div>
+                )}
               </div>
             ))}
-          </div>
-
-          <div style={{
-            marginTop: '60px',
-            textAlign: 'center',
-            padding: '40px',
-            background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-            borderRadius: '20px',
-            border: '1px solid #e2e8f0'
-          }}>
-            <h3 style={{
-              fontSize: '24px',
-              fontWeight: '700',
-              color: '#1e293b',
-              marginBottom: '12px'
-            }}>
-              Masih Ada Pertanyaan?
-            </h3>
-            <p style={{
-              fontSize: '16px',
-              color: '#64748b',
-              marginBottom: '24px'
-            }}>
-              Daftar sekarang dan mulai kelola listrik Anda dengan cerdas
-            </p>
-            <button
-              onClick={() => navigate('/register')}
-              style={{
-                padding: '14px 32px',
-                fontSize: '16px',
-                fontWeight: '600',
-                background: '#2563eb',
-                color: 'white',
-                border: 'none',
-                borderRadius: '10px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.background = '#1d4ed8';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 10px 25px rgba(37, 99, 235, 0.3)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = '#2563eb';
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = 'none';
-              }}
-            >
-              Daftar Sekarang
-              <ArrowRight size={18} />
-            </button>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="gradient-animated" style={{
-        padding: '100px 20px',
+      <div style={{
+        background: 'linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)',
+        padding: 'clamp(80px, 20vw, 100px) clamp(16px, 4vw, 20px)',
         textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden'
+        color: 'white'
       }}>
-        <div className="animate-float" style={{
-          position: 'absolute',
-          top: '20%',
-          left: '10%',
-          width: '100px',
-          height: '100px',
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '50%',
-          filter: 'blur(20px)'
-        }} />
-        <div className="animate-float" style={{
-          position: 'absolute',
-          bottom: '30%',
-          right: '15%',
-          width: '150px',
-          height: '150px',
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '50%',
-          filter: 'blur(30px)',
-          animationDelay: '1.5s'
-        }} />
-        
-        <div className="animate-float" style={{
-          position: 'absolute',
-          top: '15%',
-          right: '20%',
-          width: '80px',
-          height: '80px',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          opacity: 0.15,
-          animationDelay: '0.5s'
-        }}>
-          <img 
-            src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=200&q=80"
-            alt="Bulb"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        <div className="animate-float" style={{
-          position: 'absolute',
-          bottom: '20%',
-          left: '18%',
-          width: '100px',
-          height: '100px',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          opacity: 0.12,
-          animationDelay: '2s'
-        }}>
-          <img 
-            src="https://images.unsplash.com/photo-1558002038-bb4237b54101?w=200&q=80"
-            alt="Solar"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        
-        <div className="container" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
           <h2 style={{
-            fontSize: '56px',
+            fontSize: 'clamp(28px, 7vw, 40px)',
             fontWeight: '800',
-            color: 'white',
-            marginBottom: '24px',
-            lineHeight: '1.2',
+            marginBottom: 'clamp(16px, 4vw, 20px)',
             letterSpacing: '-0.02em'
           }}>
-            Siap Menghemat Listrik Anda?
+            Mulai Hemat Listrik Hari Ini
           </h2>
           <p style={{
-            fontSize: '22px',
-            color: 'rgba(255, 255, 255, 0.9)',
-            marginBottom: '50px',
+            fontSize: 'clamp(16px, 4vw, 18px)',
+            marginBottom: 'clamp(30px, 8vw, 40px)',
+            opacity: 0.9,
             lineHeight: '1.6'
           }}>
-            Mulai kelola penggunaan listrik dengan cerdas hari ini. Gratis dan mudah!
+            Bergabung dengan ribuan pengguna yang sudah menghemat hingga 30% biaya listrik dengan Voltify
           </p>
+
           <button
             onClick={() => navigate('/register')}
             style={{
-              padding: '20px 50px',
-              fontSize: '20px',
-              fontWeight: '700',
-              background: 'white',
+              padding: 'clamp(16px, 4vw, 20px) clamp(32px, 8vw, 48px)',
+              fontSize: 'clamp(16px, 4vw, 18px)',
+              fontWeight: '600',
               color: '#2563eb',
+              background: 'white',
               border: 'none',
               borderRadius: '12px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '12px',
-              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
-              transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+              gap: 'clamp(8px, 2vw, 12px)',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+              transition: 'all 0.4s ease',
+              marginBottom: 'clamp(24px, 6vw, 32px)'
             }}
             onMouseOver={(e) => {
-              e.target.style.transform = 'translateY(-6px) scale(1.05)';
-              e.target.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.3)';
+              e.target.style.transform = 'translateY(-4px) scale(1.05)';
+              e.target.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.3)';
             }}
             onMouseOut={(e) => {
               e.target.style.transform = 'translateY(0) scale(1)';
-              e.target.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.2)';
+              e.target.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
             }}
           >
-            Mulai Sekarang - Gratis
-            <ArrowRight size={24} />
+            Daftar Gratis Sekarang
+            <ArrowRight size={20} />
           </button>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 'clamp(20px, 8vw, 40px)',
+            flexWrap: 'wrap',
+            opacity: 0.8
+          }}>
+            {[
+              { text: '✓ Tanpa Biaya Tersembunyi' },
+              { text: '✓ Setup 5 Menit' },
+              { text: '✓ Support 24/7' }
+            ].map((item, i) => (
+              <span key={i} style={{
+                fontSize: 'clamp(13px, 3vw, 15px)',
+                fontWeight: '500'
+              }}>
+                {item.text}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Footer */}
       <footer style={{
-        background: '#0f172a',
-        color: 'white',
-        padding: '60px 20px 40px',
-        position: 'relative'
+        background: '#1e293b',
+        padding: 'clamp(40px, 10vw, 60px) clamp(16px, 4vw, 20px)',
+        textAlign: 'center'
       }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="container">
           <div style={{
             display: 'flex',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            paddingBottom: '40px',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            marginBottom: '30px',
-            flexWrap: 'wrap',
-            gap: '20px'
+            justifyContent: 'center',
+            gap: 'clamp(8px, 2vw, 12px)',
+            marginBottom: 'clamp(20px, 5vw, 24px)'
           }}>
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '12px',
-              transition: 'transform 0.3s ease',
-              cursor: 'pointer'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-            >
-              <div className="gradient-animated" style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '10px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <Zap size={24} color="white" />
-              </div>
-              <h3 style={{ fontSize: '24px', fontWeight: '700' }}>Voltify</h3>
+            <div className="gradient-animated" style={{
+              width: 'clamp(28px, 7vw, 32px)',
+              height: 'clamp(28px, 7vw, 32px)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Zap size={20} color="white" />
             </div>
-            <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
-              {['Tentang', 'Fitur', 'Kontak'].map((link, i) => (
-                <a key={i} href="#" style={{ 
-                  color: '#94a3b8', 
-                  textDecoration: 'none', 
-                  fontSize: '15px',
-                  transition: 'all 0.3s ease',
-                  position: 'relative'
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.color = '#fff';
-                  e.target.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.color = '#94a3b8';
-                  e.target.style.transform = 'translateY(0)';
-                }}
-                >{link}</a>
-              ))}
-            </div>
+            <h3 style={{
+              fontSize: 'clamp(18px, 5vw, 24px)',
+              fontWeight: '700',
+              color: 'white',
+              margin: 0
+            }}>
+              Voltify
+            </h3>
           </div>
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '15px', color: '#64748b', marginBottom: '8px' }}>
-              © 2025 Voltify - Smart Electricity Management System
-            </p>
-            <p style={{ fontSize: '14px', color: '#475569' }}>
-              Powered by Fuzzy Logic System
+
+          <p style={{
+            fontSize: 'clamp(13px, 3vw, 15px)',
+            color: '#94a3b8',
+            marginBottom: 'clamp(20px, 5vw, 24px)'
+          }}>
+            Platform manajemen listrik pintar dengan teknologi Fuzzy Logic
+          </p>
+
+          <div style={{
+            paddingTop: 'clamp(20px, 5vw, 24px)',
+            borderTop: '1px solid #334155'
+          }}>
+            <p style={{
+              fontSize: 'clamp(12px, 3vw, 14px)',
+              color: '#64748b',
+              margin: 0
+            }}>
+              © 2024 Voltify. All rights reserved.
             </p>
           </div>
         </div>
