@@ -17,6 +17,10 @@ const Navbar = () => {
   // Close dropdown and mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if click is on hamburger button
+      const hamburgerButton = event.target.closest('.mobile-menu-toggle');
+      if (hamburgerButton) return;
+
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
@@ -25,14 +29,11 @@ const Navbar = () => {
       }
     };
 
-    if (showDropdown || showMobileMenu) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showDropdown, showMobileMenu]);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -58,10 +59,22 @@ const Navbar = () => {
   return (
     <>
       {/* Mobile Menu Overlay */}
-      <div
-        className={`mobile-menu-overlay ${showMobileMenu ? 'active' : ''}`}
-        onClick={() => setShowMobileMenu(false)}
-      />
+      {showMobileMenu && (
+        <div
+          className="mobile-menu-overlay active"
+          onClick={() => setShowMobileMenu(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 998,
+            backdropFilter: 'blur(2px)'
+          }}
+        />
+      )}
 
       {/* Mobile Menu */}
       <div
@@ -114,6 +127,7 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
+                onClick={() => setShowMobileMenu(false)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -150,15 +164,16 @@ const Navbar = () => {
                 marginBottom: '16px'
               }}>
                 <div style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '48px',
+                  height: '48px',
                   background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  flexShrink: 0
                 }}>
-                  <User size={20} color="white" />
+                  <User size={22} color="white" />
                 </div>
                 <div>
                   <p style={{
@@ -405,8 +420,11 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="mobile-only touch-target"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            className="mobile-only touch-target mobile-menu-toggle"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowMobileMenu(!showMobileMenu);
+            }}
             style={{
               background: 'none',
               border: 'none',
@@ -415,7 +433,7 @@ const Navbar = () => {
               padding: '8px'
             }}
           >
-            <Menu size={24} />
+            {showMobileMenu ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
