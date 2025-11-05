@@ -456,10 +456,11 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
+            className="btn btn-primary"
             style={{
               width: '100%',
-              padding: window.innerWidth < 768 ? '20px' : '16px',
-              fontSize: window.innerWidth < 768 ? '18px' : '16px',
+              padding: 'clamp(16px, 4vw, 20px)',
+              fontSize: 'clamp(16px, 4vw, 18px)',
               fontWeight: '700',
               background: loading ? '#cbd5e1' : 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
               color: 'white',
@@ -471,16 +472,17 @@ const Register = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minHeight: window.innerWidth < 768 ? '56px' : '48px'
+              minHeight: 'var(--touch-target)',
+              touchAction: 'manipulation'
             }}
             onMouseOver={(e) => {
-              if (!loading) {
+              if (!loading && window.innerWidth >= 768) {
                 e.target.style.transform = 'translateY(-2px)';
                 e.target.style.boxShadow = '0 12px 24px rgba(37, 99, 235, 0.4)';
               }
             }}
             onMouseOut={(e) => {
-              if (!loading) {
+              if (!loading && window.innerWidth >= 768) {
                 e.target.style.transform = 'translateY(0)';
                 e.target.style.boxShadow = '0 8px 16px rgba(37, 99, 235, 0.3)';
               }
